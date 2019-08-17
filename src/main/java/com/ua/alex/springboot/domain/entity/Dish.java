@@ -1,5 +1,6 @@
-package com.ua.alex.springboot.entity;
+package com.ua.alex.springboot.domain.entity;
 
+import com.ua.alex.springboot.domain.entity.enums.Category;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,6 +19,8 @@ public class Dish {
     private long Id;
     private String name;
     private int cost;
+    @Enumerated(EnumType.STRING)
+    private Category category;
     @ManyToMany(mappedBy = "dishes")
     private List<Order> orders;
 }

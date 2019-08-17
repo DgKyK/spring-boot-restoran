@@ -1,6 +1,6 @@
-package com.ua.alex.springboot.entity;
+package com.ua.alex.springboot.domain.entity;
 
-import com.ua.alex.springboot.entity.enums.Status;
+import com.ua.alex.springboot.domain.entity.enums.Status;
 import lombok.*;
 
 import javax.persistence.*;
