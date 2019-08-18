@@ -33,4 +33,15 @@ public class DishServiceImpl implements DishService {
     public Map<Category, List<Dish>> getSortedDishesByCategory(List<Dish> allDishes) {
         return allDishes.stream().collect(Collectors.groupingBy(Dish::getCategory));
     }
+
+    @Override
+    public List<Dish> createListOfOrderedDishes(String[] orderedDishes) {
+        List<Dish> dishesInOrder = new ArrayList<>();
+        for(int i = 0; i < orderedDishes.length; i++) {
+            String[] split = orderedDishes[i].split("\\s\\|\\s");
+            Dish tempDish = dishRepository.getOne(Long.parseLong(split[0]));
+            dishesInOrder.add(tempDish);
+        }
+        return dishesInOrder;
+    }
 }

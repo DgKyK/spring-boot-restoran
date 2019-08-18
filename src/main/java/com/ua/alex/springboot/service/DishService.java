@@ -10,4 +10,5 @@ public interface DishService {
     List<Dish> getAll();
     Dish findById(Long id);
     Map<Category, List<Dish>> getSortedDishesByCategory(List<Dish> AllDishes);
+    List<Dish> createListOfOrderedDishes(String[] orderedDishes);
 }
