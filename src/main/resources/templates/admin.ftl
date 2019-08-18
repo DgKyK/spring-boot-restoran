@@ -13,7 +13,7 @@
             <div class="collapse multi-collapse" id="multiCollapseExample1">
                 <div class="list-group col-sm-5">
                     <#list users as user>
-                        <a href="/admin/admin/${user.id}" class="list-group-item list-group-item-action">${user.username}</a>
+                        <a href="/admin/admin/${user.id}" class="list-group-item list-group-item-action">${user.name}</a>
                     </#list>
                 </div>
             </div>

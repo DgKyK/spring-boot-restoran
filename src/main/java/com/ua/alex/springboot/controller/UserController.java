@@ -13,7 +13,6 @@ import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -37,7 +36,6 @@ public class UserController {
 
     @RequestMapping(value = "/user")
     public String userHome(Map<String, Object> model) {
-
         List<Dish> dishes = dishService.getAll();
         Map<Category, List<Dish>> sortedDishesByCategory = dishService.getSortedDishesByCategory(dishes);
         model.put("meat", sortedDishesByCategory.get(Category.MEAT));
@@ -47,13 +45,11 @@ public class UserController {
         return "user";
     }
 
-
     @RequestMapping("/order")
     public String createdOrder(@RequestParam String chosenMeat,
                                @RequestParam String chosenSalad,
                                @RequestParam String chosenDesert,
-                               @RequestParam String chosenDrinks, Model model) {
-//        System.out.println(chosenMeat + ", " + chosenSalad + ", " + chosenDesert + ", " + chosenDrinks);
+                               @RequestParam String chosenDrinks, Map<String, Object> model) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         UserDetails userDetails = (UserDetails) authentication.getPrincipal();
         String[] allDishesInOrder = {chosenDesert, chosenDrinks, chosenMeat, chosenSalad};
@@ -63,36 +59,21 @@ public class UserController {
 
         Order order = OrderMapper.mapOrderFromStrings(listOfOrderedDishes, userThatMakesOrder.getId());
 
+        model.put("order", order);
         orderService.saveOrder(order);
 
         return "order";
-
     }
-//    @RequestMapping("/test")
-//    public String passTest(@RequestParam String chosenTest, Model model) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//
-//        List<Question> questList = testService.findAllByChosenTest(chosenTest);
-//        Map<Integer, Answer> passedTest = AutoTestPasser.getPassedTest(questList.size());
-//        Map<String, Boolean> resultTest = TestChecker.getTestReview(questList,passedTest);
-//        studentSuccessService.saveCurrentResult(resultTest,chosenTest,userDetails.getUsername());
-//
-//        model.addAttribute("test", resultTest);
-//        System.out.println(resultTest);
-//        return "test";
-//    }
 
-//    @RequestMapping("/mystatistic")
-//    public String statistic(Model model,
-//                            @PageableDefault(sort = {"id"}, direction = Sort.Direction.DESC) Pageable pageable) {
-//        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-//        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
-//
-//        Page<StudentSuccess> page = studentSuccessService.findAllByUserName(userDetails.getUsername(), pageable);
-//
-//        model.addAttribute("page", page);
-//        model.addAttribute("url", "/user/mystatistic");
-//        return "mystatistic";
-//    }
+    @RequestMapping(value = "/myorders")
+    public String myOrders(@RequestParam(required = false) String orderId,
+                           Map<String, Object> model) {
+        if(orderId != null) {
+            orderService.deleteOrder(Long.parseLong(orderId));
+        }
+        List<Order> approvedOrders = orderService.getAllApprovedOrders();
+
+        model.put("approvedOrders", approvedOrders);
+        return "myorders";
+    }
 }

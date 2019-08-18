@@ -24,7 +24,7 @@ public class Order {
     @Enumerated(value = EnumType.STRING)
     private Status status;
     private int sumOfOrder;
-    @ManyToMany(cascade = {CascadeType.ALL})
+    @ManyToMany(cascade = {CascadeType.PERSIST})
     @JoinTable(
             name = "Order_Dish",
             joinColumns = {@JoinColumn(name = "order_id")},

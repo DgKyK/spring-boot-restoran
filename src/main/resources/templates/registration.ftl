@@ -12,11 +12,11 @@
     </#if>
     <form action="/registration" method="post">
         <div class="form-group row">
-            <label class ="col-sm-2" for="username">${rc.getMessage("message.login")}</label>
+            <label class ="col-sm-2" for="name">${rc.getMessage("message.login")}</label>
             <div class = "col-sm-5">
                 <input type="text"
                        class="form-control ${(usernameError??)?string('is-invalid','')}"
-                       name="username"
+                       name="name"
                        placeholder="${rc.getMessage("message.enterlogin")}">
                 <#if usernameError??>
                     <div class = "invalid-feedback">
@@ -38,7 +38,7 @@
             </div>
         </div>
         <div class = "form-group row">
-            <label class ="col-sm-2"  for="email">${rc.getMessage("message.email")}</label>
+            <label class ="col-sm-2"  for="">${rc.getMessage("message.email")}</label>
             <div class = "col-sm-5">
                 <input type="email" class="form-control ${(emailError??)?string('is-invalid','')}" name="email" placeholder="${rc.getMessage("message.email")}">
                 <#if emailError??>

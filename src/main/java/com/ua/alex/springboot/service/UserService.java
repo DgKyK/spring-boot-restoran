@@ -1,5 +1,6 @@
 package com.ua.alex.springboot.service;
 
+import com.ua.alex.springboot.domain.entity.Order;
 import com.ua.alex.springboot.domain.entity.User;
 
 import java.util.List;
@@ -9,4 +10,5 @@ public interface UserService {
     void save(User user);
     List<User> findAll();
     boolean addUser(User user);
+    User findById(long userId);
 }

@@ -15,12 +15,12 @@
             </#if>
             <#if isUser>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/user/mystatistic">${rc.getMessage("message.myorders")}<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/user/myorders">${rc.getMessage("message.myorders")}<span class="sr-only">(current)</span></a>
                 </li>
             </#if>
             <#if isAdmin>
                 <li class="nav-item active">
-                    <a class="nav-link" href="/admin/statistic">${rc.getMessage("message.userorders")}<span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="/admin/allorders">${rc.getMessage("message.userorders")}<span class="sr-only">(current)</span></a>
                 </li>
             </#if>
         </ul>

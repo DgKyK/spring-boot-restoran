@@ -21,6 +21,6 @@ public class Dish {
     private int cost;
     @Enumerated(EnumType.STRING)
     private Category category;
-    @ManyToMany(mappedBy = "dishes")
+    @ManyToMany(mappedBy = "dishes", cascade = CascadeType.PERSIST)
     private List<Order> orders;
 }
